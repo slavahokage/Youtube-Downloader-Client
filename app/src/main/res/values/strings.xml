@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YoutubeDownloader client</string>
+    <string name="download">Download</string>
+    <string name="result">Get result</string>
+    <string name="hint">Input url of Youtube video</string>
+</resources>
