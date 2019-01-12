@@ -2,6 +2,7 @@ package com.example.user.youtubedownloaderclient;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button downloadBtn = findViewById(R.id.btnDownload);
+        Button cleanBtn = findViewById(R.id.btnClean);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         input = findViewById(R.id.input);
 
@@ -82,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
                     }
             }
         });
+
+        cleanBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                input.setText("");
+            }
+        });
     }
 
     @Override
@@ -97,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
                         .setText(data
                                 .getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR));
                 dirOfVideos = data.getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
+                SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("path", dirOfVideos);
+                editor.commit();
             }
         }
     }
